@@ -1,0 +1,11 @@
+.\_build\dat_saver.o: ..\..\..\dat_saver.c
+.\_build\dat_saver.o: ..\..\..\..\..\..\components\libraries\fds\fds.h
+.\_build\dat_saver.o: C:\MDK-ARM\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\dat_saver.o: C:\MDK-ARM\ARM\ARMCC\Bin\..\include\stdbool.h
+.\_build\dat_saver.o: ..\..\..\..\..\..\components\libraries\util\sdk_errors.h
+.\_build\dat_saver.o: ..\..\..\..\..\..\components\softdevice\s130\headers\nrf_error.h
+.\_build\dat_saver.o: ..\..\..\..\..\..\components\libraries\fstorage\fstorage.h
+.\_build\dat_saver.o: ..\..\..\..\..\..\components\libraries\experimental_section_vars\section_vars.h
+.\_build\dat_saver.o: ..\..\..\dat_saver.h
+.\_build\dat_saver.o: ..\..\..\..\..\..\external\segger_rtt\SEGGER_RTT.h
+.\_build\dat_saver.o: ..\..\..\..\..\..\external\segger_rtt\SEGGER_RTT_Conf.h
