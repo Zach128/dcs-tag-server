@@ -464,10 +464,14 @@ static void advertising_init(void)
     options.ble_adv_fast_timeout  = APP_ADV_TIMEOUT_IN_SECONDS;
 
     // OUR_JOB: Create a scan response packet and include the list of UUIDs 
-
+		ble_advdata_manuf_data_t manuf_sr;
     ble_advdata_t srdata;
+		
+		memset(&manuf_sr, 0, sizeof(manuf_sr));
     memset(&srdata, 0, sizeof(srdata));
-    srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
+		
+		srdata.name_type = BLE_ADVDATA_NO_NAME;
+		srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
     srdata.uuids_complete.p_uuids = m_adv_uuids;
 
     err_code = ble_advertising_init(&advdata, &srdata, &options, on_adv_evt, NULL);

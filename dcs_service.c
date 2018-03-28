@@ -6,10 +6,14 @@
 #include "dcs_payload.h"
 #include "ble_srv_common.h"
 #include "app_error.h"
+#include "SEGGER_RTT.h"
 
 // ALREADY_DONE_FOR_YOU: Declaration of a function that will take care of some housekeeping of ble connections related to our service and characteristic
 void ble_dcs_service_on_ble_evt(ble_os_t * p_dcs_service, ble_evt_t * p_ble_evt)
 {
+	
+	uint32_t err_code;
+	
     // OUR_JOB: Step 3.D Implement switch case handling BLE events related to our service. 
 		switch (p_ble_evt->header.evt_id)
 		{
@@ -19,6 +23,22 @@ void ble_dcs_service_on_ble_evt(ble_os_t * p_dcs_service, ble_evt_t * p_ble_evt)
 				case BLE_GAP_EVT_DISCONNECTED:
 						p_dcs_service->conn_handle = BLE_CONN_HANDLE_INVALID;
 						break;
+				
+				case BLE_EVT_USER_MEM_REQUEST:
+						/*
+						err_code = sd_ble_user_mem_reply(p_dcs_service->conn_handle, &m_dhc_mem_block);
+						if (err_code != NRF_SUCCESS) {
+							printf("ERROR sd_ble_user_mem_reply: %u\r\n", (unsigned int)err_code);
+						} else {
+							printf("USER_MEM_REQUEST OK\r\n");
+						} */
+						
+						break;
+
+        case BLE_EVT_USER_MEM_RELEASE:
+						printf("USER_MEM_RELEASE\r\n");
+						break;
+				
 				default:
 						// No implementation needed.
 						break;
@@ -68,8 +88,8 @@ static uint32_t cic_char_add(ble_os_t * p_dcs_service)
 		attr_char_value.p_attr_md   = &attr_md;
 		
     // OUR_JOB: Step 2.H, Set characteristic length in number of bytes
-		attr_char_value.init_len    = 11;
 		attr_char_value.max_len     = 16;
+		attr_char_value.init_len    = 11;
 		uint8_t value[11]           = {0x66, 0x77, 0x64, 0x73, 0x2c, 0x73, 0x6d, 0x75, 0x2c, 0x73, 0x6d};
 		attr_char_value.p_value     = value;
 
@@ -126,8 +146,8 @@ static uint32_t iac_char_add(ble_os_t * p_dcs_service)
 		attr_char_value.p_attr_md   = &attr_md;
 		
     // OUR_JOB: Step 2.H, Set characteristic length in number of bytes
-		attr_char_value.init_len    = 4;
 		attr_char_value.max_len     = 16;
+		attr_char_value.init_len    = 4;
 		uint8_t value[4]            = {0x87,0x65,0x43,0x21};
 		attr_char_value.p_value     = value;
 		
